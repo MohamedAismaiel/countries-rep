@@ -1,6 +1,4 @@
-import { useContext, useEffect } from "react";
 import Country from "./countryCard";
-import { CountryContext } from "./context/countryContext";
 
 const Countries = (props) => {
   // const datactx = useContext(CountryContext).country;

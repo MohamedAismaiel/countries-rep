@@ -6,14 +6,20 @@ export const CountryContext = React.createContext({
   // getPath: () => {},
   rest: () => {},
   getData: (name) => {},
+  setData: (name) => {},
+  countries: [],
   // detailCountry: [],
 });
 
 const CountryProvider = (props) => {
   const [allCountries, setAllCountries] = useState([]);
+  const [countries, setCountries] = useState([]);
 
   const getData = (data) => {
     setAllCountries(data);
+  };
+  const setData = (data) => {
+    setCountries(data);
   };
   const rest = () => {
     setAllCountries([]);
@@ -26,6 +32,8 @@ const CountryProvider = (props) => {
         // getPath,
         getData,
         rest,
+        setData,
+        countries,
         // detailCountry: country,
       }}
     >

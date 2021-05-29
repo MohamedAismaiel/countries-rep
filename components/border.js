@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 const Borders = (props) => {
@@ -9,7 +8,7 @@ const Borders = (props) => {
     return <p>No borders</p>;
   }
   return (
-    <Link href={`/${filtered[0].name}`}>
+    <Link href={`/${filtered[0].alpha3Code}`}>
       <span className="layout-detailedCountry-content-borders">
         {filtered[0].name}
       </span>

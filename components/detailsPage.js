@@ -1,20 +1,15 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import { CountryContext } from "./context/countryContext";
-import Link from "next/link";
+
 import Borders from "./border";
 const DetailedPage = (props) => {
-  // const [countryy, setCountry] = useState([]);
   const router = useRouter();
 
   const getCountryName = () => {
     let name = router.asPath.replace("/", "");
-    // name = name.replace("%20", " ");
-    // name = name.replace("%C3%85", "Å");
     return name;
   };
   const name = getCountryName();
-  console.log(name);
+
   const country = props.data.filter((country) => country.alpha3Code === name);
 
   let borders = [];

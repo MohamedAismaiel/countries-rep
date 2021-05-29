@@ -6,26 +6,34 @@ import Navigation from "../components/navigation";
 import "../styles/globals.scss";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { useEffect, useState } from "react";
 
 Router.events.on("routeChangeStart", () => {
-  console.log("start");
   NProgress.start();
 });
 Router.events.on("routeChangeComplete", () => {
-  console.log("completed");
   NProgress.done();
 });
-Router.events.on("routeChangeError", () => {
-  console.log("error");
-});
+Router.events.on("routeChangeError", () => {});
 
 function MyApp({ Component, pageProps }) {
+  const [countries, setCountries] = useState([]);
+
+  const data = async () => {
+    const res = await fetch("https://restcountries.eu/rest/v2/all");
+    const data = await res.json();
+    setCountries(data);
+  };
+  useEffect(() => {
+    data();
+  }, []);
+
   return (
     <CountryProvider>
       <X>
         <Header />
-        <Navigation />
-        <Component {...pageProps} />
+        <Navigation data={countries} />
+        <Component {...pageProps} data={countries} />
       </X>
     </CountryProvider>
   );

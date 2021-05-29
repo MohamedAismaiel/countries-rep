@@ -14,7 +14,6 @@ const Navigation = (props) => {
   const [search, setSearch] = useState("");
   const text = useRef();
   const getDatactx = useContext(CountryContext).getData;
-  const [loading, setLoading] = useState(false);
 
   const getCountry = async (name) => {
     const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);

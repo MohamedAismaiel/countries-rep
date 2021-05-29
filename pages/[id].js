@@ -1,7 +1,8 @@
 import DetailedPage from "../components/detailsPage";
 
-const DetailPage = ({ dataa }) => {
-  return <DetailedPage data={dataa} />;
+const DetailPage = (props) => {
+  console.log(props);
+  return <DetailedPage data={props.dataa} />;
 };
 
 export default DetailPage;
@@ -19,6 +20,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   };
 };
+
 export const getStaticProps = async () => {
   const res = await fetch("https://restcountries.eu/rest/v2/all");
   const data = await res.json();
