@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Country = (props) => {
   return (
-    <Link href={`/${props.name}`}>
+    <Link href={`/${props.code}`}>
       <div className="card">
         <img className="card-image" src={props.image} alt="country image"></img>
         <div className="card-body">

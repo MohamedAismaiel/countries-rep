@@ -22,6 +22,7 @@ const Countries = (props) => {
             region={country.region}
             capital={country.capital}
             population={country.population}
+            code={country.alpha3Code}
           />
         ))}
       </div>

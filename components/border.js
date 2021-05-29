@@ -5,11 +5,12 @@ const Borders = (props) => {
   const filtered = props.countries.filter(
     (cu) => cu.alpha3Code === props.borders
   );
-  console.log(filtered);
+  if (filtered.length === 0) {
+    return <p>No borders</p>;
+  }
   return (
     <Link href={`/${filtered[0].name}`}>
       <span className="layout-detailedCountry-content-borders">
-        {" "}
         {filtered[0].name}
       </span>
     </Link>

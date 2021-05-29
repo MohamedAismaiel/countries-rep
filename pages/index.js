@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Layout from "../components/allCountries";
 import { CountryContext } from "../components/context/countryContext";
 const HomePage = (props) => {
+  console.log(props);
   const datactx = useContext(CountryContext).allCountries;
 
   if (datactx.length !== 0 && datactx) {

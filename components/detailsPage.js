@@ -9,16 +9,18 @@ const DetailedPage = (props) => {
 
   const getCountryName = () => {
     let name = router.asPath.replace("/", "");
-    name = name.replace("%20", " ");
+    // name = name.replace("%20", " ");
+    // name = name.replace("%C3%85", "Å");
     return name;
   };
   const name = getCountryName();
-  const country = props.data.filter((country) => country.name === name);
+  console.log(name);
+  const country = props.data.filter((country) => country.alpha3Code === name);
 
   let borders = [];
 
   const bordersArray = () => {
-    if (!country[0].borders) return;
+    if (country[0].borders.length === 0) return;
     country[0].borders.forEach((country) => borders.push(country));
   };
   bordersArray();
@@ -71,9 +73,10 @@ const DetailedPage = (props) => {
             </ul>
             <p className="layout-detailedCountry-content-border">
               Border Countries:
-              {borders.map((cu) => (
-                <Borders borders={cu} countries={props.data} />
-              ))}
+              {borders.length !== 0 &&
+                borders.map((cu) => (
+                  <Borders key={cu} borders={cu} countries={props.data} />
+                ))}
             </p>
           </div>
         </div>

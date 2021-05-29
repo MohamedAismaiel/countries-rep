@@ -18,6 +18,7 @@ const Navigation = (props) => {
 
   const getCountry = async (name) => {
     const res = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+
     if (!res.ok) return;
 
     const data = await res.json();
