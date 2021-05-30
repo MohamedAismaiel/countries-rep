@@ -1,8 +1,14 @@
+import { useContext } from "react";
+import { CountryContext } from "./context/countryContext";
 import Country from "./countryCard";
 
 const Layout = (props) => {
+  const modectx = useContext(CountryContext).mode;
+
+  const layoutClass = modectx ? "layout layout-dark" : "layout layout-light";
+
   return (
-    <section className="layout">
+    <section className={layoutClass}>
       <div className="layout-container">
         {props.countries.map((country) => (
           <Country

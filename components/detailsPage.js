@@ -1,14 +1,13 @@
-import {
-  faArrowLeft,
-  faLongArrowAltLeft,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 
 import Borders from "./border";
+import { CountryContext } from "./context/countryContext";
 const DetailedPage = (props) => {
   const router = useRouter();
-
+  const modectx = useContext(CountryContext).mode;
   const getCountryName = () => {
     let name = router.asPath.replace("/", "");
     return name;
@@ -27,13 +26,39 @@ const DetailedPage = (props) => {
   const clickHandler = () => {
     router.back();
   };
+  const layoutDetail = modectx
+    ? "layout layout-detail layout-detail-dark"
+    : "layout layout-detail layout-detail-light";
+
+  const layoutcontent = modectx
+    ? "layout-detailedCountry-content layout-detailedCountry-content-dark"
+    : "layout-detailedCountry-content layout-detailedCountry-content-light";
+  const spanclass = modectx ? "span span-dark" : "span span-light";
+  const titleclass = modectx
+    ? "layout-detailedCountry-content-title layout-detailedCountry-content-title-dark"
+    : "layout-detailedCountry-content-title layout-detailedCountry-content-title-light";
+  const borderClass = modectx
+    ? "layout-detailedCountry-content-border layout-detailedCountry-content-border-dark"
+    : "layout-detailedCountry-content-border layout-detailedCountry-content-border-light";
+
   return (
-    <section className="layout layout-detail">
+    <section className={layoutDetail}>
       <div className="layout-detail-div">
         <div className="back-btn">
-          <button onClick={clickHandler} className="back-btn-btn">
+          <button
+            onClick={clickHandler}
+            className={
+              modectx
+                ? "back-btn-btn back-btn-btn-dark"
+                : "back-btn-btn back-btn-btn-light"
+            }
+          >
             <FontAwesomeIcon
-              className="icon-back"
+              className={
+                modectx
+                  ? "icon-back icon-back-dark"
+                  : "icon-back icon-back-light "
+              }
               icon={faArrowLeft}
               style={{ width: "3rem" }}
             />
@@ -46,45 +71,43 @@ const DetailedPage = (props) => {
               src={country.flag}
               className="layout-detailedCountry-image"
             ></img>
-            <div className="layout-detailedCountry-content">
-              <h2 className="layout-detailedCountry-content-title">
-                {country.name}
-              </h2>
+            <div className={layoutcontent}>
+              <h2 className={titleclass}>{country.name}</h2>
               <ul className="layout-detailedCountry-content-list">
                 <li className="layout-detailedCountry-content-list-native">
-                  <span>Native Name: </span>
+                  <span className={spanclass}>Native Name: </span>
                   {country.nativeName}
                 </li>
                 <li className="layout-detailedCountry-content-list-population">
-                  <span>Population: </span>
+                  <span className={spanclass}>Population: </span>
                   {country.population}
                 </li>
                 <li className="layout-detailedCountry-content-list-region">
-                  <span>Region: </span>
+                  <span className={spanclass}>Region: </span>
                   {country.region}
                 </li>
                 <li className="layout-detailedCountry-content-list-subregion">
-                  <span>Sub Region: </span>
+                  <span className={spanclass}>Sub Region: </span>
                   {country.subregion}
                 </li>
                 <li className="layout-detailedCountry-content-list-capital">
-                  <span>Capital: </span>
+                  <span className={spanclass}>Capital: </span>
                   {country.capital}
                 </li>
                 <li className="layout-detailedCountry-content-list-toplevel">
-                  <span>Top Level Domain: </span>
+                  <span className={spanclass}>Top Level Domain: </span>
                   {country.topLevelDomain}
                 </li>
                 <li className="layout-detailedCountry-content-list-currency">
-                  <span>Currencies: </span>
+                  <span className={spanclass}>Currencies: </span>
                   {country.currencies[0].name}
                 </li>
                 <li className="layout-detailedCountry-content-list-languages">
-                  <span>Languages: </span>
+                  <span className={spanclass}>Languages: </span>
                   {country.languages[0].name}
                 </li>
               </ul>
-              <p className="layout-detailedCountry-content-border">
+              <p className={borderClass}>
                 Border Countries:
                 {borders.length !== 0 &&
                   borders.map((cu) => (

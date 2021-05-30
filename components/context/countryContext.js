@@ -7,6 +7,8 @@ export const CountryContext = React.createContext({
   rest: () => {},
   getData: (name) => {},
   setData: (name) => {},
+  changeMode: () => {},
+  mode: true,
   countries: [],
   // detailCountry: [],
 });
@@ -14,6 +16,11 @@ export const CountryContext = React.createContext({
 const CountryProvider = (props) => {
   const [allCountries, setAllCountries] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [mode, setMode] = useState(true);
+
+  const changeMode = () => {
+    setMode((state) => !state);
+  };
 
   const getData = (data) => {
     setAllCountries(data);
@@ -34,6 +41,8 @@ const CountryProvider = (props) => {
         rest,
         setData,
         countries,
+        mode,
+        changeMode,
         // detailCountry: country,
       }}
     >

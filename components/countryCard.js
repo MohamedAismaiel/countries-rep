@@ -1,22 +1,30 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { CountryContext } from "./context/countryContext";
 
 const Country = (props) => {
+  const modectx = useContext(CountryContext).mode;
+  const cardClass = modectx ? "card card-dark" : "card card-light";
+  const cardtextClass = modectx
+    ? "card-text card-text-dark card-text-pop"
+    : "card-text card-text-light card-text-pop";
+  const spanClass = modectx ? "textspan-dark " : "textspan-light ";
   return (
     <Link href={`/${props.code}`}>
-      <div className="card">
+      <div className={cardClass}>
         <img className="card-image" src={props.image} alt="country image"></img>
         <div className="card-body">
           <h2 className="card-title">{props.name}</h2>
-          <p className="card-text-pop card-text">
-            <span>Population: </span>
+          <p className={cardtextClass}>
+            <span className={spanClass}>Population: </span>
             {props.population}
           </p>
           <p className="card-text-region card-text">
-            <span>Region: </span>
+            <span className={spanClass}>Region: </span>
             {props.region}
           </p>
           <p className="card-text-capital card-text">
-            <span>Capital: </span>
+            <span className={spanClass}>Capital: </span>
             {props.capital}
           </p>
         </div>

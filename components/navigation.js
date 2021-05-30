@@ -1,8 +1,8 @@
 import { faCaretDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { Router } from "next/router";
-import { useContext, useRef, useState } from "react";
+import { Router, useRouter } from "next/router";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CountryContext } from "./context/countryContext";
 
 const Navigation = () => {
@@ -10,7 +10,9 @@ const Navigation = () => {
   Router.events.on("routeChangeStart", () => {
     reset();
   });
-
+  const modectx = useContext(CountryContext).mode;
+  const route = useRouter();
+  const [region, setRegion] = useState("Filter by region");
   const [search, setSearch] = useState("");
   const text = useRef();
   const getDatactx = useContext(CountryContext).getData;
@@ -23,6 +25,20 @@ const Navigation = () => {
     const data = await res.json();
     getDatactx(data);
   };
+
+  const capitalize = (s) => {
+    if (typeof s !== "string") return "";
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  };
+
+  let name = route.pathname;
+
+  if (name === "/") {
+    name = "All regions";
+  } else {
+    name = name.replace("/", "");
+    name = capitalize(name);
+  }
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -38,16 +54,27 @@ const Navigation = () => {
     getCountry(value);
     setSearch("");
   };
+  useEffect(() => {
+    setRegion(name);
+  }, [route.pathname]);
 
   const onChangeHandler = (e) => {
     setSearch(e.target.value);
   };
-  const clickHandler = () => {
-    // reset();
-  };
-
+  const navbarClass = modectx ? "navbar navbar-dark" : "navbar navbar-light";
+  const buttonClass = modectx ? "dark dark-dark" : "dark dark-light";
+  const iconClass = modectx ? "button button-dark" : "button button-light";
+  const iconClass2 = modectx
+    ? "icon-search icon-search-dark"
+    : "icon-search icon-search-light";
+  const dropbtnClass = modectx
+    ? "dropbtn dropbtn-dark"
+    : "dropbtn dropbtn-light";
+  const dropcontentClass = modectx
+    ? "dropdown-content dropdown-content-dark"
+    : "dropdown-content dropdown-content-light";
   return (
-    <div className="navbar">
+    <div className={navbarClass}>
       <div className="navbar-div">
         <div className="navbar-content">
           <form
@@ -56,6 +83,7 @@ const Navigation = () => {
             autoComplete="off"
           >
             <input
+              className={buttonClass}
               ref={text}
               type="search"
               name="search"
@@ -64,24 +92,24 @@ const Navigation = () => {
               onChange={onChangeHandler}
               value={search}
             />
-            <button onClick={onSubmitHandler}>
+            <button onClick={onSubmitHandler} className={iconClass}>
               <FontAwesomeIcon
-                className="icon-search"
+                className={iconClass2}
                 icon={faSearch}
                 style={{ width: "40px" }}
               />
             </button>
           </form>
           <div className="dropdown">
-            <button className="dropbtn">
-              Filter by region
+            <button className={dropbtnClass}>
+              {region}
               <FontAwesomeIcon
                 icon={faCaretDown}
                 style={{ width: "40px" }}
                 className="nav-icon"
               />
             </button>
-            <div onClick={clickHandler} className="dropdown-content">
+            <div className={dropcontentClass}>
               <Link href="/africa">Africa</Link>
               <Link href="/americas">America</Link>
               <Link href="/asia">Asia</Link>

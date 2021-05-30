@@ -1,20 +1,38 @@
 // import the library
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import your icons
-import { faMoon, fas } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { CountryContext } from "./context/countryContext";
 
 const Header = () => {
+  const modectx = useContext(CountryContext).mode;
+  const changeModectx = useContext(CountryContext).changeMode;
+  const onClickHandler = () => {
+    changeModectx();
+  };
+  const iconClass = modectx
+    ? "header-icon-dark header-icon "
+    : "header-icon header-icon-light ";
+  const headerClass = modectx ? "header-dark header " : "header header-light ";
+
+  const headermodeclass = modectx
+    ? "header-mode header-mode-dark"
+    : "header-mode header-mode-light";
   return (
-    <div className="header">
+    <div className={headerClass}>
       <div className="header-div">
         <h1 className="header-text">Where in the world ?</h1>
 
         <FontAwesomeIcon
-          icon={faMoon}
+          onClick={onClickHandler}
+          icon={!modectx ? faMoon : faSun}
           style={{ width: "40px" }}
-          className="header-icon"
+          className={iconClass}
         />
-        <span className="header-mode">Dark mode</span>
+        <span className={headermodeclass}>
+          {modectx ? "Dark Mode" : "Light Mode"}
+        </span>
       </div>
     </div>
   );
