@@ -108,11 +108,14 @@ const DetailedPage = (props) => {
                 </li>
               </ul>
               <p className={borderClass}>
-                Border Countries:
-                {borders.length !== 0 &&
+                <span style={{ marginLeft: "1rem" }}>Border Countries:</span>
+                {borders.length === 0 ? (
+                  <span> {country.name} has no countries at their borders</span>
+                ) : (
                   borders.map((cu) => (
                     <Borders key={cu} borders={cu} countries={props.data} />
-                  ))}
+                  ))
+                )}
               </p>
             </div>
           </div>

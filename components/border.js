@@ -10,6 +10,7 @@ const Borders = (props) => {
   if (filtered.length === 0) {
     return <p>No borders</p>;
   }
+  console.log(filtered);
   const borderspan = modectx
     ? "border-span border-span-dark"
     : "border-span border-span-light";

@@ -151,6 +151,7 @@ a {
     cursor: pointer;
     margin-left: auto;
     height: 2rem;
+
     &-dark {
       transition: $transition;
       transition: all 1s;
@@ -163,7 +164,7 @@ a {
       color: $Dark-Gray;
     }
     @media only screen and (max-width: $bp-700px) {
-      height: 1.2rem;
+      height: 2rem;
       transform: translateX(1.2rem);
       // padding-right: 2rem;
     }
@@ -317,6 +318,7 @@ a {
       &-title {
         color: inherit;
         font-size: 3rem;
+        margin-left: 1rem;
         &-dark {
           transition: $transition;
           color: white;
@@ -327,6 +329,7 @@ a {
         }
       }
       &-list {
+        margin-left: 1rem;
         font-weight: 600;
         padding-left: 0;
         height: 22rem;
@@ -375,7 +378,7 @@ a {
           cursor: pointer;
           display: inline-block;
           // border: 1px solid white;
-          margin: 1rem 1rem;
+          margin: 0.5rem 1rem;
           padding: 1rem;
 
           &-dark {
@@ -556,7 +559,7 @@ a {
     font-size: 1.8rem;
   }
   @media only screen and (max-width: $bp-700px) {
-    width: 47rem;
+    width: 100vw;
     padding: 0;
     padding-left: 2rem;
     padding-right: 0.8rem;
@@ -603,7 +606,7 @@ a {
   }
   @media only screen and (max-width: $bp-700px) {
     top: 22rem;
-    width: 46.8rem;
+    width: 100vw;
   }
 }
 
