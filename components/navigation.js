@@ -5,7 +5,7 @@ import { Router } from "next/router";
 import { useContext, useRef, useState } from "react";
 import { CountryContext } from "./context/countryContext";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const reset = useContext(CountryContext).rest;
   Router.events.on("routeChangeStart", () => {
     reset();
@@ -48,45 +48,47 @@ const Navigation = (props) => {
 
   return (
     <div className="navbar">
-      <div className="navbar-content">
-        <form
-          onSubmit={onSubmitHandler}
-          className="form-control"
-          autoComplete="off"
-        >
-          <input
-            ref={text}
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Search for a country"
-            onChange={onChangeHandler}
-            value={search}
-          />
-          <button onClick={onSubmitHandler}>
-            <FontAwesomeIcon
-              className="icon-search"
-              icon={faSearch}
-              style={{ width: "40px" }}
+      <div className="navbar-div">
+        <div className="navbar-content">
+          <form
+            onSubmit={onSubmitHandler}
+            className="form-control"
+            autoComplete="off"
+          >
+            <input
+              ref={text}
+              type="search"
+              name="search"
+              id="search"
+              placeholder="Search for a country"
+              onChange={onChangeHandler}
+              value={search}
             />
-          </button>
-        </form>
-        <div className="dropdown">
-          <button className="dropbtn">
-            Filter by region
-            <FontAwesomeIcon
-              icon={faCaretDown}
-              style={{ width: "40px" }}
-              className="nav-icon"
-            />
-          </button>
-          <div onClick={clickHandler} className="dropdown-content">
-            <Link href="/africa">Africa</Link>
-            <Link href="/americas">America</Link>
-            <Link href="/asia">Asia</Link>
-            <Link href="/europe">Europe</Link>
-            <Link href="/oceiana">Oceiana</Link>
-            <Link href="/">All regions</Link>
+            <button onClick={onSubmitHandler}>
+              <FontAwesomeIcon
+                className="icon-search"
+                icon={faSearch}
+                style={{ width: "40px" }}
+              />
+            </button>
+          </form>
+          <div className="dropdown">
+            <button className="dropbtn">
+              Filter by region
+              <FontAwesomeIcon
+                icon={faCaretDown}
+                style={{ width: "40px" }}
+                className="nav-icon"
+              />
+            </button>
+            <div onClick={clickHandler} className="dropdown-content">
+              <Link href="/africa">Africa</Link>
+              <Link href="/americas">America</Link>
+              <Link href="/asia">Asia</Link>
+              <Link href="/europe">Europe</Link>
+              <Link href="/oceiana">Oceiana</Link>
+              <Link href="/">All regions</Link>
+            </div>
           </div>
         </div>
       </div>

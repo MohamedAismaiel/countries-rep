@@ -23,16 +23,18 @@ function MyApp({ Component, pageProps }) {
     const res = await fetch("https://restcountries.eu/rest/v2/all");
     const data = await res.json();
     setCountries(data);
+    localStorage.setItem("data", JSON.stringify(data));
   };
   useEffect(() => {
     data();
   }, []);
-
+  console.log();
   return (
     <CountryProvider>
       <X>
         <Header />
-        <Navigation data={countries} />
+        {pageProps.dataa ? null : <Navigation />}
+
         <Component {...pageProps} data={countries} />
       </X>
     </CountryProvider>

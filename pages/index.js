@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Layout from "../components/allCountries";
 import { CountryContext } from "../components/context/countryContext";
 const HomePage = (props) => {
@@ -6,6 +6,7 @@ const HomePage = (props) => {
   const setData = useContext(CountryContext).setData;
 
   const allData = props.data;
+
   if (datactx.length !== 0 && datactx) {
     return <Layout countries={datactx} />;
   }

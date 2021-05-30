@@ -1,7 +1,6 @@
 import DetailedPage from "../components/detailsPage";
 
 const DetailPage = (props) => {
-  console.log(props);
   return <DetailedPage data={props.dataa} />;
 };
 

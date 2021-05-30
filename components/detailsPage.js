@@ -1,3 +1,8 @@
+import {
+  faArrowLeft,
+  faLongArrowAltLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 
 import Borders from "./border";
@@ -19,63 +24,77 @@ const DetailedPage = (props) => {
     country[0].borders.forEach((country) => borders.push(country));
   };
   bordersArray();
-
+  const clickHandler = () => {
+    router.back();
+  };
   return (
-    <section className="layout">
-      {country.map((country) => (
-        <div key={country.name} className="layout-detailedCountry">
-          <img
-            src={country.flag}
-            className="layout-detailedCountry-image"
-          ></img>
-          <div className="layout-detailedCountry-content">
-            <h2 className="layout-detailedCountry-content-title">
-              {country.name}
-            </h2>
-            <ul className="layout-detailedCountry-content-list">
-              <li className="layout-detailedCountry-content-list-native">
-                <span>Native Name: </span>
-                {country.nativeName}
-              </li>
-              <li className="layout-detailedCountry-content-list-population">
-                <span>Population: </span>
-                {country.population}
-              </li>
-              <li className="layout-detailedCountry-content-list-region">
-                <span>Region: </span>
-                {country.region}
-              </li>
-              <li className="layout-detailedCountry-content-list-subregion">
-                <span>Sub Region: </span>
-                {country.subregion}
-              </li>
-              <li className="layout-detailedCountry-content-list-capital">
-                <span>Capital: </span>
-                {country.capital}
-              </li>
-              <li className="layout-detailedCountry-content-list-toplevel">
-                <span>Top Level Domain: </span>
-                {country.topLevelDomain}
-              </li>
-              <li className="layout-detailedCountry-content-list-currency">
-                <span>Currencies: </span>
-                {country.currencies[0].name}
-              </li>
-              <li className="layout-detailedCountry-content-list-languages">
-                <span>Languages: </span>
-                {country.languages[0].name}
-              </li>
-            </ul>
-            <p className="layout-detailedCountry-content-border">
-              Border Countries:
-              {borders.length !== 0 &&
-                borders.map((cu) => (
-                  <Borders key={cu} borders={cu} countries={props.data} />
-                ))}
-            </p>
-          </div>
+    <section className="layout layout-detail">
+      <div className="layout-detail-div">
+        <div className="back-btn">
+          <button onClick={clickHandler} className="back-btn-btn">
+            <FontAwesomeIcon
+              className="icon-back"
+              icon={faArrowLeft}
+              style={{ width: "3rem" }}
+            />
+            <span className="text">Back</span>
+          </button>
         </div>
-      ))}
+        {country.map((country) => (
+          <div key={country.name} className="layout-detailedCountry">
+            <img
+              src={country.flag}
+              className="layout-detailedCountry-image"
+            ></img>
+            <div className="layout-detailedCountry-content">
+              <h2 className="layout-detailedCountry-content-title">
+                {country.name}
+              </h2>
+              <ul className="layout-detailedCountry-content-list">
+                <li className="layout-detailedCountry-content-list-native">
+                  <span>Native Name: </span>
+                  {country.nativeName}
+                </li>
+                <li className="layout-detailedCountry-content-list-population">
+                  <span>Population: </span>
+                  {country.population}
+                </li>
+                <li className="layout-detailedCountry-content-list-region">
+                  <span>Region: </span>
+                  {country.region}
+                </li>
+                <li className="layout-detailedCountry-content-list-subregion">
+                  <span>Sub Region: </span>
+                  {country.subregion}
+                </li>
+                <li className="layout-detailedCountry-content-list-capital">
+                  <span>Capital: </span>
+                  {country.capital}
+                </li>
+                <li className="layout-detailedCountry-content-list-toplevel">
+                  <span>Top Level Domain: </span>
+                  {country.topLevelDomain}
+                </li>
+                <li className="layout-detailedCountry-content-list-currency">
+                  <span>Currencies: </span>
+                  {country.currencies[0].name}
+                </li>
+                <li className="layout-detailedCountry-content-list-languages">
+                  <span>Languages: </span>
+                  {country.languages[0].name}
+                </li>
+              </ul>
+              <p className="layout-detailedCountry-content-border">
+                Border Countries:
+                {borders.length !== 0 &&
+                  borders.map((cu) => (
+                    <Borders key={cu} borders={cu} countries={props.data} />
+                  ))}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
